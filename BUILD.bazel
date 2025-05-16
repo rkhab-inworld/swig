@@ -1,0 +1,47 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+config_setting(
+    name = "on_windows",
+    constraint_values = ["@platforms//os:windows"],
+)
+
+cc_binary(
+    name = "swigjs",
+    srcs = glob([
+        "Source/CParse/*.c",
+        "Source/CParse/*.h",
+        "Source/DOH/*.c",
+        "Source/DOH/*.h",
+        "Source/Doxygen/*.cxx",
+        "Source/Doxygen/*.h",
+        "Source/Include/*.h",
+        "Source/Modules/*.cxx",
+        "Source/Modules/*.h",
+        "Source/Preprocessor/*.c",
+        "Source/Preprocessor/*.h",
+        "Source/Swig/*.c",
+        "Source/Swig/*.h",        
+    ]),
+    copts = ["$(STACK_FRAME_UNLIMITED)"] + select({
+        "on_windows": [],
+        "//conditions:default": [
+            "-Wno-parentheses",
+            "-Wno-unused-variable",
+            "-fexceptions",
+        ],
+    }),
+    includes = [
+        "Source/CParse",
+        "Source/DOH",
+        "Source/Doxygen",
+        "Source/Include",
+        "Source/Modules",
+        "Source/Preprocessor",
+        "Source/Swig",
+    ],    
+    deps = [
+        "@pcre2",
+    ],
+)
