@@ -19,7 +19,7 @@
 #define SWIG_SHARED_PTR_NAMESPACE std
 %include <shared_ptr.i>
 
-%define SWIG_SHARED_PTR_TYPEMAPS(CONST, TYPE)
+%define SWIG_SHARED_PTR_TYPEMAPS(CONST, TYPE...)
 
 // These typemaps obtain a JS persistent reference
 // that is freed when the shared_ptr is destroyed,
