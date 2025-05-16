@@ -45,3 +45,10 @@ cc_binary(
         "@pcre2",
     ],
 )
+
+filegroup(
+    name = "library",
+    srcs = glob([
+        "Lib/**",        
+    ]),
+)
